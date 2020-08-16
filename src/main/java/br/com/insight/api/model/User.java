@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name="\"user\"")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 //@JsonSerialize(using = JacksonCustomPetSerializer.class)
 //@JsonDeserialize(using = JacksonCustomPetDeserializer.class)
 public class User {
@@ -41,7 +42,7 @@ public class User {
     private String phone;
 	
 //	@JsonIgnore
-	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JsonManagedReference
     private List<Activity> activities = new ArrayList<Activity>();
 

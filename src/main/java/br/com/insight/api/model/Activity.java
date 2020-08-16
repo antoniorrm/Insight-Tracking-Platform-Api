@@ -12,19 +12,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 
 @Entity
 @Table(name = "activity")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Activity {
 	
 	public enum TypeEnum {
-		COURSE, PRESENTATION, LECTURES
+		CURSO, APRESENTAÇÃO, PALESTRA
 	}
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;	
+    private Long id;	
 
 	@Column(nullable = false)
     private String type;
@@ -33,7 +35,7 @@ public class Activity {
     private String description;
 	
 	@NotNull
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
 	 @JsonBackReference
     private User user;
@@ -66,11 +68,11 @@ public class Activity {
 
 
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

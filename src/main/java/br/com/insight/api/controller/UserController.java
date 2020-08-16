@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +20,7 @@ import io.swagger.annotations.ApiOperation;
 
 @RestController
 @RequestMapping("api")
+@CrossOrigin(origins = "*")
 public class UserController {
 	@Autowired
     private ActivityRepository activityRepository;
@@ -25,12 +28,12 @@ public class UserController {
 	@Autowired
     private UserRepository userRepository;
 
-	@ApiOperation(value="User", notes="")
+	@ApiOperation(value="Retorna a lista de usuários")
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public List<User> getUsersOfActivity(@RequestParam(required = false) String type , @RequestParam(required = false) String value ) {
+    public List<User> getAll(@RequestParam(required = false) String type , @RequestParam(required = false) String value ) {
     	try {
     		if(type == null || value == null) {
-    			return userRepository.findAll();
+    			return userRepository.findAllByOrderByIdAsc();
     		}
     		List<Activity> activitys = activityRepository.findByTypeAndDescription(type, value);
         	System.out.println(type);
@@ -47,7 +50,36 @@ public class UserController {
     }
     
     @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public User Store(@RequestBody User newUser) {
+    public User create(@RequestBody User newUser) {
         return userRepository.save(newUser);
+    }
+    
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
+    public User update(@PathVariable("id") Long id, @RequestBody User userUpdate) {
+    	try {
+    		User user = userRepository.getOne(id);
+    		user.setName(userUpdate.getName());
+    		user.setEmail(userUpdate.getEmail());
+    		user.setAdress(userUpdate.getAdress());
+    		user.setPhone(userUpdate.getPhone());
+            return userRepository.saveAndFlush(user);	
+		} catch (Exception e) {
+			System.out.println(e);
+		}
+		return null;
+    	
+    }
+    
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.GET)
+    public User getOne(@PathVariable("id") Long id) {
+        return userRepository.getOne(id);
+    }
+    
+    @RequestMapping(value = "/user/{id}", method = RequestMethod.DELETE)
+    public User delete(@PathVariable("id") Long id) {
+    	User user = userRepository.getOne(id);
+    	userRepository.delete(user);
+    	userRepository.flush();
+        return user;
     }
 }

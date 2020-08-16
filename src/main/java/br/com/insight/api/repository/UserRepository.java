@@ -12,7 +12,7 @@ import br.com.insight.api.model.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>  {
 	
-//	List<User> findByActivities(List activities);
+	List<User> findAllByOrderByIdAsc();
     
 //	List<User> (String type, String Description);
 //	@Autowired
