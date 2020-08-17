@@ -33,7 +33,7 @@ public class User {
     private String name;
 	
 	@Column(nullable = false)
-    private String adress;
+    private String address;
 	
 	@Column(nullable = false)
     private String email;
@@ -85,8 +85,8 @@ public class User {
 	/**
 	 * @return the adress
 	 */
-	public String getAdress() {
-		return adress;
+	public String getAddress() {
+		return address;
 	}
 
 
@@ -94,8 +94,8 @@ public class User {
 	/**
 	 * @param adress the adress to set
 	 */
-	public void setAdress(String adress) {
-		this.adress = adress;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 
@@ -156,7 +156,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", adress=" + adress + ", email=" + email + ", phone=" + phone
+		return "User [id=" + id + ", name=" + name + ", address=" + address + ", email=" + email + ", phone=" + phone
 				+ "]";
 	}
 	

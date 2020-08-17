@@ -60,7 +60,7 @@ public class UserController {
     		User user = userRepository.getOne(id);
     		user.setName(userUpdate.getName());
     		user.setEmail(userUpdate.getEmail());
-    		user.setAdress(userUpdate.getAdress());
+    		user.setAddress(userUpdate.getAddress());
     		user.setPhone(userUpdate.getPhone());
             return userRepository.saveAndFlush(user);	
 		} catch (Exception e) {
