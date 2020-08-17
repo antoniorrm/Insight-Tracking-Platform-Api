@@ -13,16 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 @Entity
 @Table(name="\"user\"")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-//@JsonSerialize(using = JacksonCustomPetSerializer.class)
-//@JsonDeserialize(using = JacksonCustomPetDeserializer.class)
 public class User {
 
 	@Id
