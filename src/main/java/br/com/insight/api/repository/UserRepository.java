@@ -13,12 +13,5 @@ import br.com.insight.api.model.User;
 public interface UserRepository extends JpaRepository<User, Long>  {
 	
 	List<User> findAllByOrderByIdAsc();
-    
-//	List<User> (String type, String Description);
-//	@Autowired
-//	@Override
-//	default User getOne(Long id) {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+
 }
