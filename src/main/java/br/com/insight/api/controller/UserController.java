@@ -46,7 +46,6 @@ public class UserController {
 			System.out.println(e);
 		}
 		return null;
-    	
     }
     
     @RequestMapping(value = "/user", method = RequestMethod.POST)
